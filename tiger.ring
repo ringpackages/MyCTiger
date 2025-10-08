@@ -6,13 +6,13 @@ Tiger {
 	
 }
 
-? Tiger 
-
+? Tiger
 Tiger.buildAndRun()
 
 class c 
 
 	cOutput = ""
+	nTabs   = 1
 
 	func braceStart
 
@@ -31,8 +31,11 @@ int main(int argc, char *argv[])
 
 	func braceExprEval vValue
 
-		cOutput += `printf("` + vValue + `");` + nl
+		cOutput += getTabs() + `printf("` + vValue + `");` + nl
 
+
+	func getTabs
+		return copy(Tab,nTabs)
 		
 	func buildAndRun
 
