@@ -1,4 +1,12 @@
-Tiger = new C
+Tiger = new Tiger
+
+class Tiger from C 
+
+	func braceEnd 
+
+		super.braceEnd()
+		printSourceCode()
+		buildAndRun()		
 
 class c 
 
