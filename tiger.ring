@@ -1,4 +1,10 @@
+lTesting = False 
+
 Tiger = new Tiger
+
+func testingTiger
+
+	lTesting = True
 
 class Tiger from C 
 
@@ -6,7 +12,9 @@ class Tiger from C
 
 		super.braceEnd()
 		printSourceCode()
-		buildAndRun()		
+		if lTesting = False
+			buildAndRun()	
+		ok	
 
 class c 
 
