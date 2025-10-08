@@ -13,6 +13,8 @@ class c
 	cOutput = ""
 	nTabs   = 1
 
+	lLiteralToOutput = True
+
 	lCcode  = False
 
 	C
@@ -43,8 +45,9 @@ int main(int argc, char *argv[])
 			return
 		ok
 
-		cOutput += getTabs() + `printf("` + vValue + `");` + nl
-
+		if lLiteralToOutput
+			cOutput += getTabs() + `printf("` + vValue + `");` + nl
+		ok
 
 	func getTabs
 
