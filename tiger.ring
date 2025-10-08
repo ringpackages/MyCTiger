@@ -11,6 +11,21 @@ Tiger {
 		}
 	`
 	#=================================================
+
+	if isWindows() 
+		"I am using Windows\n"
+	else
+		"I am not using Windows\n"
+	ok
+
+	for t=1 to 10 
+		string(t) "- C programming is fun!\n"
+	next
+
+	for t=1 to 10 
+		"t = " string(t) " square = " string(t*t) "\n"
+	next
+
 	
 }
 
