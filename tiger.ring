@@ -29,7 +29,7 @@ Tiger {
 	
 }
 
-? Tiger
+Tiger.printSourceCode()
 Tiger.buildAndRun()
 
 class c 
@@ -71,7 +71,12 @@ int main(int argc, char *argv[])
 
 
 	func getTabs
+
 		return copy(Tab,nTabs)
+
+	func printSourceCode
+
+		? cOutput
 		
 	func buildAndRun
 
