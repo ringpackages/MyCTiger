@@ -60,6 +60,9 @@ int main(int argc, char *argv[])
 	func buildAndRun
 
 		write("myfile.c",cOutput)
-		system("cl myfile.c")
-		system("myfile.exe")
+		write("buildapp.bat",
+				`call locatevc.bat`+nl+
+				"cl myfile.c"+nl+
+				"myfile.exe")
+		system("buildapp.bat")
 	
