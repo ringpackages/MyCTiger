@@ -3,7 +3,9 @@ class Tiger from C
 	func braceEnd 
 
 		super.braceEnd()
-		printSourceCode()
+		if ! lTigerFile
+			printSourceCode()
+		ok
 		if lTesting = False
 			buildAndRun()	
 		ok	
@@ -60,9 +62,17 @@ int main(int argc, char *argv[])
 	func buildAndRun
 
 		write("myfile.c",cOutput)
-		write("buildapp.bat",
+		if ! lTigerFile
+			write("buildapp.bat",
 				`call locatevc.bat`+nl+
 				"cl myfile.c"+nl+
 				"myfile.exe")
-		system("buildapp.bat")
+			system("buildapp.bat")
+		else 
+			write("buildapp.bat",
+				`call locatevc.bat >nul`+nl+
+				"cl myfile.c >nul")
+			systemSilent("buildapp.bat")
+			system("myfile.exe")
+		ok
 	
