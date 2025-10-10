@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 		generateCode()
 		if ! lTigerFile
 			write("buildapp.bat",
-				`call locatevc.bat`+nl+
+				`call tools\msvc\locatevc.bat`+nl+
 				"cl myfile.c"+nl+
 				"myfile.exe")
 			system("buildapp.bat")
