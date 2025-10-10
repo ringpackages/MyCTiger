@@ -58,10 +58,25 @@ int main(int argc, char *argv[])
 	func printSourceCode
 
 		? cOutput
-		
-	func buildAndRun
+
+	func generateCode
 
 		write("myfile.c",cOutput)
+
+	func buildAndRun
+
+		buildAndRunTCC()
+
+	func buildAndRunTCC
+
+		generateCode()
+		write("buildapp.bat","tcc\tcc myfile.c")
+		systemSilent("buildapp.bat")
+		system("myfile.exe")
+
+	func buildAndRunMSVC
+
+		generateCode()
 		if ! lTigerFile
 			write("buildapp.bat",
 				`call locatevc.bat`+nl+
