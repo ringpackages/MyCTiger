@@ -1,5 +1,4 @@
-load "stdlibcore.ring"
-load "lib/lib.ring"
+load "src/main.ring"
 
 if isMainSourceFile()
 
