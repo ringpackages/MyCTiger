@@ -12,6 +12,9 @@ class Tiger from C
 
 class c 
 
+	cOutputFile = "myfile.c"
+	cExeFile = "myfile.exe"
+
 	cOutput = ""
 	nTabs   = 1
 
@@ -60,12 +63,14 @@ int main(int argc, char *argv[])
 		? cOutput
 
 	func generateCode
-
-		write("myfile.c",cOutput)
+		
+		cOutputFile = substr(cTigerFile,".tiger",".c")
+		cEXEFile = substr(cTigerFile,".tiger",".exe")
+		write(cOutputFile,cOutput)
 
 	func cleanFiles
 		
-		remove("myfile.c")
+		remove(cOutputFile)
 		remove("buildapp.bat")
 
 	func buildAndRun
@@ -76,9 +81,9 @@ int main(int argc, char *argv[])
 	func buildAndRunTCC
 
 		generateCode()
-		write("buildapp.bat",exefolder()+"\tools\tcc\tcc myfile.c")
+		write("buildapp.bat",exefolder()+"\tools\tcc\tcc " + cOutputFile + " -o " + cEXEFile)
 		systemSilent("buildapp.bat")
-		system("myfile.exe")
+		system(cExeFile)
 
 	func buildAndRunMSVC
 
@@ -86,14 +91,14 @@ int main(int argc, char *argv[])
 		if ! lTigerFile
 			write("buildapp.bat",
 				"call "+exefolder()+"\tools\msvc\locatevc.bat"+nl+
-				"cl myfile.c"+nl+
-				"myfile.exe")
+				"cl "+cOutputFile + " -o " + cEXEFile + nl +
+				cExeFile)
 			system("buildapp.bat")
 		else 
 			write("buildapp.bat",
 				`call locatevc.bat >nul`+nl+
-				"cl myfile.c >nul")
+				"cl " + cOutputFile + " -o " + cEXEFile + " >nul")
 			systemSilent("buildapp.bat")
-			system("myfile.exe")
+			system(cExeFile)
 		ok
 	
