@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
 	func buildAndRunTCC
 
 		generateCode()
-		write("buildapp.bat","tcc\tcc myfile.c")
+		write("buildapp.bat","tools\tcc\tcc myfile.c")
 		systemSilent("buildapp.bat")
 		system("myfile.exe")
 
