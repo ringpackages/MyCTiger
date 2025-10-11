@@ -7,12 +7,25 @@ func testingTiger
 func processArguments
 
 	aPara = appArguments()
-	if aPara and fexists(aPara[1])
-		cTigerFile = aPara[1]
-		if isWindows()
-			cTigerFile = substr(cTigerFile,"/","\")
+	if aPara
+		if fexists(aPara[1])
+			cTigerFile = aPara[1]
+			if isWindows()
+				cTigerFile = substr(cTigerFile,"/","\")
+			ok
+			lTigerFile = ( right(cTigerFile,6) = ".tiger" )
+			cCode = "load '" + cTigerFile + "'" + nl 
+			eval(cCode)
 		ok
-		lTigerFile = ( right(cTigerFile,6) = ".tiger" )
-		cCode = "load '" + cTigerFile + "'" + nl 
-		eval(cCode)
+	else 
+		appInfo()
 	ok
+
+func appInfo
+
+	? "==========================================================================="
+	? "MyCTiger version 1.0.0"
+	? "2025, Mahmoud Fayed"
+	? "==========================================================================="
+	? "Usage: tiger <filename.tiger>"
+	? "==========================================================================="
