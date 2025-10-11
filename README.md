@@ -12,10 +12,10 @@ This isn’t about runtime language integration—it’s about compile-time code
 
 • **Compile-Time Ring Execution:** Leverage Ring source code during compilation to drive C code generation.
 
-• **Meta-Language for C:** Treat Ring as a high-level DSL for authoring and structuring C programs.
+• **Meta-Language for C:** Treat Ring as a high-level DSL for generating and structuring C programs.
 
 • **Raw C Injection:** Seamlessly embed raw C code into the generated output for full control and flexibility.
 
-• **Unrestricted C Integration:** Use any C source files or libraries directly—no bindings, wrappers, or runtime glue required.
+• **Unrestricted C Integration:** Use C libraries directly—no bindings, wrappers, or runtime glue required.
 
   
