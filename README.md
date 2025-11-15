@@ -20,7 +20,7 @@ This isn’t about runtime language integration—it’s about compile-time code
 
 ## 🔧 Development Status
 
-This is a prototype of the idea, designed to be extended by interested developers with their own libraries and DSLs.
+This is a prototype of the idea (Could be extended by interested developers with their own libraries and DSLs).
 
 Development and testing are performed using MS-Windows, Ring 1.24, and TCC.
 
