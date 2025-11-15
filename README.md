@@ -38,7 +38,7 @@ Output
 
 	Hello, World!
 
-Generated C code
+Generated C code (hello.c)
 
 	#include "stdio.h"
 
@@ -63,7 +63,7 @@ Output
 
 	Hello, World! - Using C code
 
-Generated C code
+Generated C code (helloc.c)
 
 	#include "stdio.h"
 
@@ -74,7 +74,7 @@ Generated C code
 	}
 	
 
-(3) Using Ring code at compile-time
+(3) Using Ring code at compile-time (test.tiger)
 
 	Tiger {
 
@@ -136,7 +136,7 @@ Output:
 	t = 9 square = 81
 	t = 10 square = 100	
 
-Generated C code
+Generated C code (test.c)
 
 	#include "stdio.h"
 
