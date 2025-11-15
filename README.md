@@ -22,6 +22,20 @@ This isn’t about runtime language integration—it’s about compile-time code
 
 This is a prototype of the idea, designed to be extended by interested developers with their own libraries and DSLs.
 
+Development and testing are performed using MS-Windows, Ring 1.24, and TCC.
+
+To build Tiger.exe, run build.bat after installing the Ring programming language.
+
+Usage:
+
+	Tiger <filename.tiger>
+
+Output:
+
+	<filename.c>		// Generated C source code
+	<filename.exe>		// Executable file
+
+
 ## 📚 Examples
 
 (1) Hello World program (hello.tiger)
