@@ -98,7 +98,7 @@ Generated C code (helloc.c)
 			"" + t + "- C programming is fun!\n"
 		next
 
-		for t=1 to 10 
+		for t=1 to 5 
 			"t = " + t + " square = " + (t*t) + "\n"
 		next
 	
@@ -129,12 +129,7 @@ Output:
 	t = 2 square = 4
 	t = 3 square = 9
 	t = 4 square = 16
-	t = 5 square = 25
-	t = 6 square = 36
-	t = 7 square = 49
-	t = 8 square = 64
-	t = 9 square = 81
-	t = 10 square = 100	
+	t = 5 square = 25	
 
 Generated C code (test.c)
 
@@ -160,11 +155,6 @@ Generated C code (test.c)
 		printf("t = 3 square = 9\n");
 		printf("t = 4 square = 16\n");
 		printf("t = 5 square = 25\n");
-		printf("t = 6 square = 36\n");
-		printf("t = 7 square = 49\n");
-		printf("t = 8 square = 64\n");
-		printf("t = 9 square = 81\n");
-		printf("t = 10 square = 100\n");
 
 		return 0;
 	}
