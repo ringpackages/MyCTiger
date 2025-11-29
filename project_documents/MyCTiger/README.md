@@ -28,10 +28,13 @@ MyCTiger aims to transform the Ring programming language into a powerful meta-la
 
 ### Module 2: Core DSL Enhancements
 - **Goal**: Improve the `Tiger` and `C` classes to support more complex C generation patterns.
+- **Status**: **Complete**.
 - **Tasks**:
-    - [ ] Support for defining C functions outside of `main`.
-    - [ ] Support for including custom headers.
-    - [ ] Improved indentation handling for generated code.
+    - [x] **T02.01**: Refactor `C` class to separate global code (includes, functions) from `main` function code.
+    - [x] **T02.02**: Add support for defining functions outside `main` using a new DSL command (e.g., `function` or `code`).
+    - [x] **T02.03**: Add `include` method to support custom headers.
+    - [x] **T02.04**: Improve indentation logic in `processCCode` and `braceExprEval`.
+    - [x] **T02.05**: Create a test case `tests/functions.tiger` to verify new features.
 
 ### Module 3: Standard Library Wrappers
 - **Goal**: Provide Ring-like wrappers for common C standard library functions to reduce raw C injection needs.

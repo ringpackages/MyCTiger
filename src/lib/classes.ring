@@ -16,32 +16,50 @@ class c
 	cExeFile = "myfile.exe"
 
 	cOutput = ""
+	aGlobalCode = []
+	aMainCode   = []
+
 	nTabs   = 1
 
 	lLiteralToOutput = True
 
 	lCcode  = False
+	lGlobalCode = False
 
-	C
+	C Global
 
 	func getC
 		lCcode = True
 
+	func getGlobal
+		lGlobalCode = True
+
+	func Header cHeader
+		aGlobalCode + (`#include "` + cHeader + `"`)
+
 	func braceStart
 
-		cOutput += `#include "stdio.h"
-
-int main(int argc, char *argv[])
-{
-`
+		aGlobalCode = []
+		aMainCode   = []
+		Header("stdio.h")
 
 	func braceEnd
 	
+		cOutput = list2Str(aGlobalCode) + nl + nl
+		cOutput += `int main(int argc, char *argv[])
+{
+`
+		cOutput += list2Str(aMainCode) + nl
 		cOutput += nl+getTabs()+`return 0;
 }
 `
 
 	func braceExprEval vValue
+
+		if lGlobalCode and vValue
+			processGlobalCode(vValue)
+			return
+		ok
 
 		if lCcode and vValue
 			processCCode(vValue)
@@ -49,21 +67,49 @@ int main(int argc, char *argv[])
 		ok
 
 		if lLiteralToOutput
-			cOutput += getTabs() + `printf("` + vValue + `");` + nl
+			aMainCode + (getTabs() + `printf("` + vValue + `");`)
 		ok
 
 	func processCCode vValue
+		aMainCode + formatCode(vValue)
+		lCCode = False
 
+	func processGlobalCode vValue
+		aGlobalCode + formatCode(vValue)
+		lGlobalCode = False
+
+	func formatCode vValue
 		aList = str2List(vValue)
-		for cLine in aList 
-			while left(cLine,1) = tab 
+		// Find minimum indentation
+		nMinTab = 100
+		for cLine in aList
+			if trim(cLine) = "" loop ok
+			nTab = 0
+			while left(cLine,1) = tab
+				nTab++
 				cLine = substr(cLine,2)
 			end
-			cLine = getTabs() + cLine
+			if nTab < nMinTab nMinTab = nTab ok
+		next
+		
+		if nMinTab = 100 nMinTab = 0 ok
+
+		// Reconstruct with corrected indentation
+		aList2 = []
+		for cLine in aList
+			if trim(cLine) = "" 
+				aList2 + ""
+				loop 
+			ok
+			// Remove min tabs
+			for x = 1 to nMinTab
+				if left(cLine,1) = tab
+					cLine = substr(cLine,2)
+				ok
+			next
+			aList2 + (getTabs() + cLine)
 		next 
-		vValue = list2Str(aList)
-		cOutput += vValue + nl
-		lCCode = False
+		return list2Str(aList2)
 
 	func getTabs
 

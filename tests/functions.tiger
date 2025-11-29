@@ -1,0 +1,12 @@
+Tiger {
+	Header("stdlib.h")
+
+	Global `
+		void myFunc() {
+			printf("Hello from myFunc!\n");
+		}
+	`
+
+	"Calling myFunc..."
+	C `myFunc();`
+}
