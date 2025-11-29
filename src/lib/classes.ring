@@ -164,11 +164,23 @@ class c
 
 	func cleanFiles
 		
-		remove("buildapp.bat")
+		if not lKeepFiles
+			remove("buildapp.bat")
+			if not lTigerFile
+				remove(cOutputFile)
+			ok
+		ok
 
 	func buildAndRun
 
-		buildAndRunTCC()
+		switch cCompiler
+		on "TCC"
+			buildAndRunTCC()
+		on "GCC"
+			buildAndRunGCC()
+		on "MSVC"
+			buildAndRunMSVC()
+		off
 		cleanFiles()
 
 	func getToolsFolder
@@ -182,7 +194,22 @@ class c
 	func buildAndRunTCC
 
 		generateCode()
-		write("buildapp.bat",getToolsFolder()+"\tcc\tcc " + cOutputFile + " -o " + cEXEFile)
+		cBuildCmd = getToolsFolder()+"\tcc\tcc " + cOutputFile + " -o " + cEXEFile
+		if lVerbose
+			? "Building with TCC: " + cBuildCmd
+		ok
+		write("buildapp.bat", cBuildCmd)
+		systemSilent("buildapp.bat")
+		system(cExeFile)
+
+	func buildAndRunGCC
+
+		generateCode()
+		cBuildCmd = "gcc " + cOutputFile + " -o " + cEXEFile
+		if lVerbose
+			? "Building with GCC: " + cBuildCmd
+		ok
+		write("buildapp.bat", cBuildCmd)
 		systemSilent("buildapp.bat")
 		system(cExeFile)
 

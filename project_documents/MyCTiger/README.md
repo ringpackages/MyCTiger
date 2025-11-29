@@ -49,10 +49,13 @@ MyCTiger aims to transform the Ring programming language into a powerful meta-la
 
 ### Module 4: Tooling & CLI
 - **Goal**: Enhance the command-line interface.
+- **Status**: **Complete**.
 - **Tasks**:
-    - [ ] Support for compiler selection (TCC, GCC, MSVC).
-    - [ ] Command-line flags for keeping intermediate files.
-    - [ ] "Watch" mode for auto-recompilation.
+    - [x] **T04.01**: Add command-line flags support (`--help`, `--version`, `--keep-files`, `--compiler`).
+    - [x] **T04.02**: Add compiler selection (TCC, GCC, MSVC) via command-line flag.
+    - [x] **T04.03**: Add option to keep intermediate files (`.c`, `.bat`).
+    - [x] **T04.04**: Improve error messages and user feedback.
+    - [x] **T04.05**: Create comprehensive help documentation.
 
 ### Module 5: Testing & Examples
 - **Goal**: Ensure reliability and provide learning resources.
