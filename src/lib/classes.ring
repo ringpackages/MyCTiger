@@ -115,6 +115,43 @@ class c
 
 		return copy(Tab,nTabs)
 
+	func print cText
+		aMainCode + (getTabs() + `printf("` + cText + `");`)
+
+	func println cText
+		aMainCode + (getTabs() + `printf("` + cText + `\n");`)
+
+	func puts cText
+		aMainCode + (getTabs() + `puts("` + cText + `");`)
+
+	func input cPrompt, cVarName
+		Header("stdio.h")
+		# Declare variable in global
+		aGlobalCode + (`char ` + cVarName + `[256];`)
+		# Print prompt and read input
+		aMainCode + (getTabs() + `printf("` + cPrompt + `");`)
+		aMainCode + (getTabs() + `fgets(` + cVarName + `, 256, stdin);`)
+
+	func systemCmd cCmd
+		Header("stdlib.h")
+		aMainCode + (getTabs() + `system("` + cCmd + `");`)
+
+	func exitCode nCode
+		Header("stdlib.h")
+		aMainCode + (getTabs() + `exit(` + nCode + `);`)
+
+	func strLen cVarName
+		Header("string.h")
+		return `strlen(` + cVarName + `)`
+
+	func strCopy cDest, cSrc
+		Header("string.h")
+		aMainCode + (getTabs() + `strcpy(` + cDest + `, "` + cSrc + `");`)
+
+	func strCat cDest, cSrc
+		Header("string.h")
+		aMainCode + (getTabs() + `strcat(` + cDest + `, "` + cSrc + `");`)
+
 	func printSourceCode
 
 		? cOutput

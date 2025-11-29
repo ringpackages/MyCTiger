@@ -1,0 +1,5 @@
+Tiger {
+	stdio.println("Hello from stdio wrapper!")
+	stdio.print("This is a test")
+	stdio.println(" of the wrappers.")
+}

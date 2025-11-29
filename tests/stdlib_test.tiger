@@ -1,0 +1,3 @@
+Tiger {
+	stdlib.systemCall("echo Testing system call wrapper")
+}

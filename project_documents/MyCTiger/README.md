@@ -38,10 +38,14 @@ MyCTiger aims to transform the Ring programming language into a powerful meta-la
 
 ### Module 3: Standard Library Wrappers
 - **Goal**: Provide Ring-like wrappers for common C standard library functions to reduce raw C injection needs.
+- **Status**: **Complete**.
 - **Tasks**:
-    - [ ] `stdio.h` wrappers (printf, scanf, file I/O).
-    - [ ] `stdlib.h` wrappers (malloc, free, system).
-    - [ ] `string.h` wrappers.
+    - [x] **T03.01**: Create `src/lib/std/` directory structure.
+    - [x] **T03.02**: Implement `stdio.ring` wrappers (print, println, input).
+    - [x] **T03.03**: Implement `stdlib.ring` wrappers (malloc, free, exit).
+    - [x] **T03.04**: Implement `string.ring` wrappers (strlen, strcpy, strcmp).
+    - [x] **T03.05**: Update `lib.ring` to load standard library wrappers.
+    - [x] **T03.06**: Create test cases for each wrapper library.
 
 ### Module 4: Tooling & CLI
 - **Goal**: Enhance the command-line interface.
