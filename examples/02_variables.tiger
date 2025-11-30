@@ -1,0 +1,17 @@
+# Example 02: Working with C Variables
+# This example shows how to define and use C variables
+
+Tiger {
+	# Define variables in global scope
+	Global `
+		int counter = 0;
+		char message[50] = "MyCTiger is awesome!";
+	`
+
+	# Use the variables in main
+	C `
+		counter = 42;
+		printf("Counter value: %d\n", counter);
+		printf("Message: %s\n", message);
+	`
+}

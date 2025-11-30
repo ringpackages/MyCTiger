@@ -1,0 +1,32 @@
+# Example 05: Using Standard Library Wrappers
+# This example demonstrates the use of MyCTiger's standard library wrappers
+
+Tiger {
+	# Using stdio wrappers
+	stdio.println("=== Standard Library Wrappers Demo ===")
+	stdio.println("")
+	
+	stdio.print("Using stdio.print: ")
+	stdio.println("This is easier than raw C!")
+	
+	stdio.println("")
+	stdio.println("=== System Call Demo ===")
+	
+	# Using stdlib wrappers
+	if isWindows()
+		stdlib.systemCall("echo Running on Windows")
+	else
+		stdlib.systemCall("echo Running on Unix/Linux")
+	ok
+	
+	stdio.println("")
+	stdio.println("=== Mixed Approach ===")
+	
+	# You can still mix with raw C when needed
+	C `
+		printf("Raw C printf still works!\n");
+	`
+	
+	stdio.println("")
+	stdio.println("Demo completed successfully!")
+}

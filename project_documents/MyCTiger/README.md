@@ -59,9 +59,15 @@ MyCTiger aims to transform the Ring programming language into a powerful meta-la
 
 ### Module 5: Testing & Examples
 - **Goal**: Ensure reliability and provide learning resources.
+- **Status**: **Complete**.
 - **Tasks**:
-    - [ ] Create a test runner in Ring.
-    - [ ] Add comprehensive examples for each feature.
+    - [x] **T05.01**: Create comprehensive example files in `examples/` directory.
+    - [x] **T05.02**: Create `examples/01_hello_world.tiger` - Basic hello world.
+    - [x] **T05.03**: Create `examples/02_variables.tiger` - Working with C variables.
+    - [x] **T05.04**: Create `examples/03_functions.tiger` - Defining custom functions.
+    - [x] **T05.05**: Create `examples/04_loops.tiger` - Using Ring loops for code generation.
+    - [x] **T05.06**: Create `examples/05_wrappers.tiger` - Using standard library wrappers.
+    - [x] **T05.07**: Update main README.md with comprehensive documentation.
 
 ---
 *This roadmap is a living document and will be updated as the project evolves.*

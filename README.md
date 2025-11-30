@@ -4,9 +4,9 @@
 
 MyCTiger transforms the Ring programming language into a powerful domain-specific language (DSL) for generating and building C programs. 
 
-It empowers developers to enjoy the performance and efficiency of C while leveraging Ring’s expressive syntax and productivity for DSL creation. Unlike traditional approaches that embed Ring within C applications or extend the Ring VM using C code, MyCTiger reimagines Ring as a meta-language for C. 
+It empowers developers to enjoy the performance and efficiency of C while leveraging Ring's expressive syntax and productivity for DSL creation. Unlike traditional approaches that embed Ring within C applications or extend the Ring VM using C code, MyCTiger reimagines Ring as a meta-language for C. 
 
-This isn’t about runtime language integration—it’s about compile-time code generation. With MyCTiger, Ring becomes a high-level interface for producing C code, enabling direct injection of raw C and seamless use of existing C libraries without bindings.
+This isn't about runtime language integration—it's about compile-time code generation. With MyCTiger, Ring becomes a high-level interface for producing C code, enabling direct injection of raw C and seamless use of existing C libraries without bindings.
 
 ## 🎉 Key Features of MyCTiger
 
@@ -18,161 +18,227 @@ This isn’t about runtime language integration—it’s about compile-time code
 
 • **Unrestricted C Integration:** Use C libraries directly—no bindings, wrappers, or runtime glue required.
 
+• **Global Code & Functions:** Define custom C functions and global variables outside of main using the `Global` block.
+
+• **Standard Library Wrappers:** Use Ring-like wrappers for common C functions (stdio, stdlib, string).
+
+• **Multiple Compiler Support:** Choose between TCC (default), GCC, or MSVC.
+
+• **Flexible CLI:** Command-line options for keeping files, verbose output, compiler selection, and more.
+
 ## 🔧 Development Status
 
-This is a prototype of the idea (Could be extended by interested developers with their own libraries and DSLs).
+This project has been enhanced with additional features including:
+- Global code and custom function support
+- Standard library wrappers for easier C programming
+- Advanced command-line interface with multiple options
+- Support for multiple C compilers (TCC, GCC, MSVC)
 
-Development and testing are performed using MS-Windows, Ring 1.24, and TCC (Exists in the Tools folder).
+Development and testing are performed using MS-Windows, Ring 1.24, and TCC (included in the Tools folder).
 
-To build Tiger.exe, run build.bat after installing the Ring programming language.
+To build Tiger.exe, run `build.bat` after installing the Ring programming language.
 
-Usage:
+## 🚀 Usage
 
-	Tiger <filename.tiger>
+```bash
+tiger <filename.tiger> [options]
+```
 
-Output:
+Or when running from source:
 
-	<filename.c>		// Generated C source code
-	<filename.exe>		// Executable file
+```bash
+ring tiger.ring <filename.tiger> [options]
+```
 
+### Command-Line Options
 
-## 📚 Examples
+- `-h, --help` - Show help message with all available options
+- `-v, --version` - Display version information
+- `-k, --keep-files` - Keep intermediate files (.c, .bat) for inspection
+- `-c, --compiler <name>` - Select compiler: TCC (default), GCC, or MSVC
+- `--verbose` - Enable verbose output to see compilation commands
 
-(1) Hello World program (hello.tiger)
+### Usage Examples
 
-	Tiger {
-		"Hello, World! \n"
-	}
+```bash
+# Basic usage (using TCC by default)
+ring tiger.ring examples/01_hello_world.tiger
 
-To build and run the program
+# Keep generated C files for inspection
+ring tiger.ring myapp.tiger --keep-files
 
-	Tiger hello.tiger
+# Use GCC compiler instead of TCC
+ring tiger.ring myapp.tiger --compiler GCC
 
-Output
+# Verbose mode to see compilation details
+ring tiger.ring myapp.tiger --verbose
 
-	Hello, World!
+# Combine multiple options
+ring tiger.ring myapp.tiger --keep-files --verbose --compiler MSVC
+```
 
-Generated C code (hello.c)
+### Output Files
 
-	#include "stdio.h"
+- `<filename>.c` - Generated C source code
+- `<filename>.exe` - Compiled executable (Windows)
+- `buildapp.bat` - Build script (kept only with --keep-files)
 
-	int main(int argc, char *argv[])
-	{
-		printf("Hello, World! \n");
-		return 0;
-	}
-	
+## 📚 Quick Start Examples
 
-(2) Using C code in Tiger files (helloc.tiger)
+### (1) Hello World
 
-	Tiger {
-		C ` printf("Hello, World! - Using C code\n");  `
-	}
+```ring
+Tiger {
+	"Hello, World!\n"
+}
+```
 
-To build and run the program
+**Run:** `ring tiger.ring examples/01_hello_world.tiger`
 
-	Tiger helloc.tiger
+**Output:** `Hello, World!`
 
-Output
+### (2) Using Raw C Code
 
-	Hello, World! - Using C code
+```ring
+Tiger {
+	C ` printf("Hello from C!\n"); `
+}
+```
 
-Generated C code (helloc.c)
+### (3) Defining Custom Functions
 
-	#include "stdio.h"
-
-	int main(int argc, char *argv[])
-	{
-		printf("Hello, World! - Using C code\n");
-		return 0;
-	}
-	
-
-(3) Using Ring code at compile-time (test.tiger)
-
-	Tiger {
-
-		"Hello, World! \n"
-
-		#=================================================
-		C `
-			for (int x=1 ; x <= 10 ;x++) {
-				printf("%d\n",x);
-			}
-		`
-		#=================================================
-
-		if isWindows() 
-			"I am using Windows\n"
-		else
-			"I am not using Windows\n"
-		ok
-
-		for t=1 to 3 
-			"" + t + "- C programming is fun!\n"
-		next
-
-		for t=1 to 5 
-			"t = " + t + " square = " + (t*t) + "\n"
-		next
-	
-	}
-  
-To build and run the program
-
-	Tiger test.tiger
-
-Output:
-
-	Hello, World!
-	1
-	2
-	3
-	4
-	5
-	6
-	7
-	8
-	9
-	10
-	I am using Windows
-	1- C programming is fun!
-	2- C programming is fun!
-	3- C programming is fun!
-	t = 1 square = 1
-	t = 2 square = 4
-	t = 3 square = 9
-	t = 4 square = 16
-	t = 5 square = 25	
-
-Generated C code (test.c)
-
-	#include "stdio.h"
-
-	int main(int argc, char *argv[])
-	{
-
-		printf("Hello, World! \n");
-	
-		for (int x=1 ; x <= 10 ;x++) {
-			printf("%d\n",x);
+```ring
+Tiger {
+	Global `
+		void greet(char* name) {
+			printf("Hello, %s!\n", name);
 		}
+	`
 	
-		printf("I am using Windows\n");
+	C `greet("MyCTiger");`
+}
+```
 
-		printf("1- C programming is fun!\n");
-		printf("2- C programming is fun!\n");
-		printf("3- C programming is fun!\n");
+### (4) Using Ring Loops for Code Generation
 
-		printf("t = 1 square = 1\n");
-		printf("t = 2 square = 4\n");
-		printf("t = 3 square = 9\n");
-		printf("t = 4 square = 16\n");
-		printf("t = 5 square = 25\n");
+```ring
+Tiger {
+	for i = 1 to 10
+		"Number: " + i + "\n"
+	next
+}
+```
 
-		return 0;
-	}
+### (5) Using Standard Library Wrappers
 
-# 📜License 
+```ring
+Tiger {
+	stdio.println("Using stdio wrapper!")
+	stdlib.systemCall("echo This is easy!")
+}
+```
+
+## 📖 More Examples
+
+Check the `examples/` directory for comprehensive examples:
+- `01_hello_world.tiger` - Basic hello world
+- `02_variables.tiger` - Working with C variables
+- `03_functions.tiger` - Defining custom functions
+- `04_loops.tiger` - Using Ring loops for code generation
+- `05_wrappers.tiger` - Using standard library wrappers
+
+Each example includes detailed comments and demonstrates different features of MyCTiger.
+
+## 🏗️ Project Structure
+
+```
+MyCTiger/
+├── src/
+│   ├── main.ring           # Entry point
+│   └── lib/
+│       ├── classes.ring    # Core DSL classes (Tiger, C)
+│       ├── functions.ring  # CLI and startup functions
+│       ├── globals.ring    # Global variables and instances
+│       └── std/            # Standard library wrappers
+│           ├── stdio.ring
+│           ├── stdlib.ring
+│           └── string.ring
+├── examples/               # Example .tiger files
+├── tests/                  # Test files
+├── tools/                  # C compilers (TCC, MSVC)
+├── tiger.ring              # Main executable script
+└── build.bat               # Build script for tiger.exe
+```
+
+## 🔑 DSL Reference
+
+### Main Block
+
+```ring
+Tiger {
+	# Your code here
+}
+```
+
+### String Literals (Auto printf)
+
+```ring
+Tiger {
+	"This will be printed\n"
+}
+```
+
+### Raw C Code
+
+```ring
+Tiger {
+	C `
+		int x = 10;
+		printf("x = %d\n", x);
+	`
+}
+```
+
+### Global Code (Functions & Variables)
+
+```ring
+Tiger {
+	Global `
+		int counter = 0;
+		
+		void increment() {
+			counter++;
+		}
+	`
+}
+```
+
+### Custom Headers
+
+```ring
+Tiger {
+	Header("stdlib.h")
+	Header("math.h")
+}
+```
+
+### Standard Library Wrappers
+
+```ring
+Tiger {
+	# stdio wrappers
+	stdio.print("text")
+	stdio.println("text with newline")
+	
+	# stdlib wrappers
+	stdlib.systemCall("command")
+	stdlib.exitProgram(0)
+	
+	# string wrappers (return values for use in C code)
+	C `int len = ` + string.strlen("myvar") + `;`
+}
+```
+
+# 📜 License 
 
 The MyCTiger project is distributed under the MIT License.

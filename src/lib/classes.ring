@@ -67,6 +67,18 @@ class c
 		ok
 
 		if lLiteralToOutput
+			# Convert value to string if needed
+			if isString(vValue)
+				# Already a string, use as is
+			but isNumber(vValue)
+				vValue = string(vValue)
+			but isList(vValue) or isObject(vValue)
+				# Skip lists and objects (they shouldn't be printed directly)
+				return
+			else
+				# Unknown type, skip
+				return
+			ok
 			aMainCode + (getTabs() + `printf("` + vValue + `");`)
 		ok
 

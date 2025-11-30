@@ -1,0 +1,32 @@
+# Example 04: Using Ring Loops for Code Generation
+# This demonstrates the power of Ring as a meta-language
+
+Tiger {
+	"=== Multiplication Table (5x5) ===\n"
+
+	# Use Ring's for loop to generate C printf statements at compile time
+	for i = 1 to 5
+		cLine = ""
+		for j = 1 to 5
+			cLine += "" + (i*j) + "\t"
+		next
+		cLine + "\n"
+	next
+
+	"\n=== Counting ===\n"
+	
+	# Generate counting sequence at compile time
+	for i = 1 to 20
+		"" + i + " "
+	next
+	"\n"
+	
+	"\n=== Powers of 2 ===\n"
+	
+	# Generate powers of 2
+	nPower = 1
+	for i = 0 to 10
+		"2^" + i + " = " + nPower + "\n"
+		nPower = nPower * 2
+	next
+}
