@@ -49,7 +49,9 @@ int main(int argc, char *argv[])
 		ok
 
 		if lLiteralToOutput
-			cOutput += getTabs() + `printf("` + vValue + `");` + nl
+			if vValue	// Avoid empty strings
+				cOutput += getTabs() + `printf("` + vValue + `");` + nl
+			ok
 		ok
 
 	func processCCode vValue
